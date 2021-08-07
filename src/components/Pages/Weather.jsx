@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from './input/Input';
+import Input from '../Input/Input';
 
 const Weather = (props) => {
 
@@ -17,6 +17,26 @@ const Weather = (props) => {
         inputValue: "",
     });
 
+    const dataDecryptor = (data) => {
+        const initialState = {};
+
+        initialState.country = data.sys.country; // место
+        initialState.location = data.name; // место
+        initialState.temp = Math.round(data.main.temp); // температура
+        initialState.feels_like = Math.round(data.main.feels_like); // температура по ощущениям 
+        initialState.humidity = data.main.humidity; // влажность
+        initialState.description = data.weather[0].description; // ясность
+        initialState.wind_speed = data.wind.speed; // скорость ветра
+        initialState.img = `https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/${data.weather[0].icon}.png`;
+        const date = new Date();
+        const arrMonth = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
+        initialState.month = arrMonth[date.getMonth()];
+        initialState.day = date.getDate();
+        initialState.inputValue = "";
+
+        setInfo(initialState);
+    }
+
     const getWeather = (coords) => {
         const apiUrl = process.env.REACT_APP_API_URL;
         const apiKey = process.env.REACT_APP_API_KEY;
@@ -26,23 +46,7 @@ const Weather = (props) => {
             return fetch(apiQuery)
                 .then(response => response.json())
                 .then(data => {
-                    const initialState = {};
-                    
-                    initialState.country = data.sys.country; // место
-                    initialState.location = data.name; // место
-                    initialState.temp = Math.round(data.main.temp); // температура
-                    initialState.feels_like = Math.round(data.main.feels_like); // температура по ощущениям 
-                    initialState.humidity = data.main.humidity; // влажность
-                    initialState.description = data.weather[0].description; // ясность
-                    initialState.wind_speed = data.wind.speed; // скорость ветра
-                    initialState.img = `https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/${data.weather[0].icon}.png`;
-                    const date = new Date();
-                    const arrMonth = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
-                    initialState.month = arrMonth[date.getMonth()];
-                    initialState.day = date.getDate();
-                    initialState.inputValue = "";
-  
-                    setInfo(initialState);
+                    dataDecryptor(data);
                 })
                 .catch(error => alert("Ошибка получения погоды. Причина: " + error));
         } else {
@@ -50,23 +54,7 @@ const Weather = (props) => {
             return fetch(apiQuery)
                 .then(response => response.json())
                 .then(data => {
-                    const initialState = {};
-
-                    initialState.country = data.sys.country; // место
-                    initialState.location = data.name; // место
-                    initialState.temp = Math.round(data.main.temp); // температура
-                    initialState.feels_like = Math.round(data.main.feels_like); // температура по ощущениям 
-                    initialState.humidity = data.main.humidity; // влажность
-                    initialState.description = data.weather[0].description; // ясность
-                    initialState.wind_speed = data.wind.speed; // скорость ветра
-                    initialState.img = `https://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/${data.weather[0].icon}.png`;
-                    const date = new Date();
-                    const arrMonth = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'];
-                    initialState.month = arrMonth[date.getMonth()];
-                    initialState.day = date.getDate();
-                    initialState.inputValue = "";
-                    
-                    setInfo(initialState);
+                    dataDecryptor(data);
                 })
                 .catch(error => alert("Ошибка получения погоды. Причина: " + error));
         }

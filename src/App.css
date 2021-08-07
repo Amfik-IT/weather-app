@@ -20,23 +20,23 @@ body {
 }
 
 p {
-  margin: 0;
-  height: 90%;
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   width: 50%;
+  height: 90%;
+  margin: 0;
 }
 
 .wheather_widget {
   position: fixed;
   right: 10px;
-  border-radius: 10px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   width: 300px;
   margin-right: 0px;
+  border-radius: 10px;
   transition-duration: 0.7s;
   transition-property: margin-right;
 }
@@ -50,8 +50,8 @@ p {
 
 .day {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .day {
@@ -60,10 +60,10 @@ p {
 
 .row {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
   padding: 5px 10px;
 }
 
@@ -82,10 +82,10 @@ p {
 }
 
 .weather-left-temp {
-  width: 50%;
-  align-items: center;
-  justify-content: center;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 }
 
 .weather-right-card {
@@ -116,19 +116,19 @@ p {
 }
 
 .bottom {
-  border-bottom: 1px black solid;
-  background-color: #94caca;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  border-bottom: 1px black solid;
+  background-color: #94caca;
   border-radius: 0px 0px 10px 10px;
 }
 
 #openWeather {
-  text-decoration: none;
+  cursor: pointer;
   border-radius: 5px;
   background-color: #c9c9c9;
-  cursor: pointer;
+  text-decoration: none;
   transition-property: background-color;
   transition-duration: 0.5s;
 }
